@@ -1,6 +1,8 @@
-package array_list_representation;
+package adjacent_list;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class AdjacentListGraph {
     ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
@@ -28,6 +30,32 @@ public class AdjacentListGraph {
                 System.out.print(" -> " + nodeList.get(i).neighbors.get(j).name);
             }
             System.out.println();
+        }
+
+    }
+
+    // BFS traversal
+    public void bfs() {
+        // Create a queue
+        Queue<GraphNode> queue = new LinkedList<>();
+
+        // add first element in the queue
+        queue.add(nodeList.get(0));
+
+        while (!queue.isEmpty()) {
+            GraphNode current = queue.remove();
+            if (current.is_visited)
+                continue;
+
+            // Visit the node
+            System.out.print(current.name + ", ");
+
+            // Add its adjacent nodes to the queue
+            for (GraphNode neighbor : current.neighbors) {
+                queue.add(neighbor);
+            }
+            // Mark the node as visited
+            current.is_visited = true;
         }
 
     }
